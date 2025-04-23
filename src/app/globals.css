@@ -1,1 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 @import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: false;
+}
+
+@theme {
+  --color-primary: #3399FF;
+  --color-primary-button-shade: #288aec;
+}
+
+@layer base {
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+}
+
+.custom-shadow {
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.35);
+}
