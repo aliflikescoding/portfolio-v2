@@ -1,36 +1,31 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { usePathname } from "next/navigation";
-import { Link } from "@/i18n/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const LanguageSwitcher = () => {
   const locale = useLocale();
   const pathname = usePathname();
-
-  const languages = [
-    { code: "en", label: "EN" },
-    { code: "id", label: "ID" },
-  ];
+  const router = useRouter();
 
   // Remove the locale part from the current pathname
   const pathWithoutLocale = pathname.replace(/^\/(en|id)/, "") || "/";
 
+  const toggleLanguage = () => {
+    const newLocale = locale === "en" ? "id" : "en";
+    router.push(`/${newLocale}${pathWithoutLocale}`);
+  };
+
   return (
-    <div className="flex gap-2">
-      {languages.map((lang) => (
-        <Link
-          key={lang.code}
-          href={pathWithoutLocale}
-          locale={lang.code}
-          className={`px-3 py-1 rounded ${
-            locale === lang.code ? "bg-black text-white" : "bg-gray-200"
-          }`}
-        >
-          {lang.label}
-        </Link>
-      ))}
-    </div>
+    <>
+      <button
+        onClick={toggleLanguage}
+        className="text-2xl p-4 rounded-full cursor-pointer bg-gray-200 hover:bg-gray-300 transition absolute top-2 right-2"
+        aria-label="Switch Language"
+      >
+        {locale === "en" ? "🇺🇸" : "🇮🇩"}
+      </button>
+    </>
   );
 };
 
